@@ -1,4 +1,4 @@
-function App() {
+const App = () => {
   return (
     <div>
       My name is ... and I'm ... years old.
