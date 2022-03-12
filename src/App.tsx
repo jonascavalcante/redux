@@ -1,8 +1,22 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+
 import { useAppSelector } from "./redux/hooks/useAppSelector";
+import { setAge, setName } from "./redux/reducers/userReducer";
 
 const App = () => {
 
+  const dispatch = useDispatch();
+
   const user = useAppSelector(state => state.user);
+
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setName(e.target.value));
+  }
+
+  const handleAge = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAge(e.target.value));
+  }
 
   return (
     <div>
@@ -13,7 +27,28 @@ const App = () => {
 
       <hr />
 
-      <input type="text" value={user.name} />
+      <label>
+        Name
+        <br />
+        <input
+          type="text"
+          value={user.name}
+          onChange={handleName}
+        />
+      </label>
+
+      <br />
+
+      <label>
+        Age
+        <br />
+        <input
+          type="number"
+          value={user.age}
+          onChange={handleAge}
+          min='0'
+        />
+      </label>
 
       <hr />
 
