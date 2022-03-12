@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 
 import { useAppSelector } from "./redux/hooks/useAppSelector";
 import { setAge, setName } from "./redux/reducers/userReducer";
+import { setThemeStatus } from "./redux/reducers/themeReducer";
 
 const App = () => {
 
   const dispatch = useDispatch();
 
   const user = useAppSelector(state => state.user);
+  const theme = useAppSelector(state => state.theme);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setName(e.target.value));
@@ -18,12 +20,20 @@ const App = () => {
     dispatch(setAge(e.target.value));
   }
 
+  const handleTheme = () => {
+    if (theme.status === 'light') {
+      return dispatch(setThemeStatus('dark'));
+    }
+
+    dispatch(setThemeStatus('light'));
+  }
+
   return (
     <div>
       My name is {user.name} and I'm {user.age} years old.
       <br />
       <br />
-      Theme: ...
+      Theme: {theme.status}
 
       <hr />
 
@@ -52,7 +62,7 @@ const App = () => {
 
       <hr />
 
-      <button>Change Theme</button>
+      <button onClick={handleTheme}>Change Theme</button>
     </div>
   );
 }
