@@ -1,13 +1,19 @@
+import { useAppSelector } from "./redux/hooks/useAppSelector";
+
 const App = () => {
+
+  const user = useAppSelector(state => state.user);
+
   return (
     <div>
-      My name is ... and I'm ... years old.
+      My name is {user.name} and I'm {user.age} years old.
+      <br />
       <br />
       Theme: ...
 
       <hr />
 
-      <input type="text" value={'...'} />
+      <input type="text" value={user.name} />
 
       <hr />
 
